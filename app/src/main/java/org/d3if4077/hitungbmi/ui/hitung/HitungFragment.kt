@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -32,11 +31,15 @@ class HitungFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_about) {
-            findNavController().navigate(
-                R.id.action_hitungFragment_to_aboutFragment
-            )
-            return true
+        when (item.itemId) {
+            R.id.menu_histori -> {
+                findNavController().navigate(R.id.action_hitungFragment_to_historiFragment)
+                return true
+            }
+            R.id.menu_about -> {
+                findNavController().navigate(R.id.action_hitungFragment_to_aboutFragment)
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -45,7 +48,7 @@ class HitungFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHitungBinding.inflate(layoutInflater, container, false)
         binding.submit.setOnClickListener { hitungBmi() }
         binding.reset.setOnClickListener { reset() }
